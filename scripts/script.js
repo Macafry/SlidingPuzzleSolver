@@ -1,4 +1,5 @@
 const SIZE = 4;
+const ROTATION = 'CCW';
 
 function slide(e, game) {
 
@@ -25,7 +26,7 @@ function slide(e, game) {
 }
 
 
-let game = new SliderPuzzle(SIZE);
+let game = new SliderPuzzleRotator(SIZE, ROTATION);
 $('#main').html(game.toTable());
 
 function shuffle() {
@@ -36,21 +37,22 @@ function shuffle() {
 
 window.addEventListener("keydown", (e) => slide(e, game));
 
-
 shuffle();
 
 let solver = new SliderPuzzleSolver(game);
-let moves = solver.solveSequence().reverse();
+let moves = solver.solveSequence().map(x => game.unrotate(x));
 console.log(moves.length);
 
 function step() {
-    game.move(moves.pop());
+    game.move(moves.shift());
     $('#main').html(game.toTable());
 }
+
 
 async function autoStep() {
     for (let i = 1; i <= moves.length; i++) {
         step();
-        await new Promise(r => setTimeout(r, 2000));
+        await new Promise(r => setTimeout(r, 500));
     }
 }
+

@@ -1,51 +1,28 @@
 class SliderPuzzle {
-    #size;
-    #area;
-    #gameState;
+    _size;
+    _area;
+    _gameState;
 
     constructor(size) {
-        this.#size = size;
-        this.#area = size * size;
+        this._size = size;
+        this._area = size * size;
 
-        this.#gameState = Array.from({length: this.#area}, (_, i) => i + 1);
-        this.#gameState[this.#area - 1] = 0;
+        this._gameState = Array.from({length: this._area}, (_, i) => i + 1);
+        this._gameState[this._area - 1] = 0;
     }
 
     get gameState() {
-        return [...this.#gameState];
+        return [...this._gameState];
     }
 
     get size() {
-        return this.#size;
-    }
-
-
-    inversions() {
-        let inversionCount = 0;
-        const gameState = this.#gameState;
-
-        for(let i = 0; i < gameState.length; i++) {
-            for(let j = i + 1; j < gameState.length; j++) {
-                
-                let x = gameState[i];
-                let y = gameState[j];
-    
-                if( x === 0 || y === 0) 
-                    continue;
-    
-                if( y < x ) {
-                    inversionCount++;
-                }
-            }
-        }
-    
-        return inversionCount;
+        return this._size;
     }
 
     move(direction) {
 
-        let gameState = this.#gameState;
-        const size = this.#size;
+        let gameState = this._gameState;
+        const size = this._size;
         const gapIndex = gameState.indexOf(0);
     
         switch(direction) {
@@ -101,9 +78,9 @@ class SliderPuzzle {
 
 
     toTable() {
-        const gameState = this.#gameState;
-        const size =  this.#size;
-        const area =  this.#area;
+        const gameState = this._gameState;
+        const size =  this._size;
+        const area =  this._area;
 
         let table = '<table>\n';
 
@@ -122,11 +99,7 @@ class SliderPuzzle {
     }
 
     toString() { 
-        this.#gameState.toString() 
+        return this._gameState.toString() 
     };
-
-    stateString() {
-        this.#gameState.toString() 
-    }
 
 }

@@ -185,7 +185,7 @@ class SliderPuzzleSolver{
         stateQueue.push(root);
         
 
-        // find solution using BFS
+        // find solution using A*
         while ( stateQueue.size() > 0 ) {
 
             // find next unprocessed node
