@@ -15,7 +15,7 @@ class SliderPuzzleInterface {
       this.#game = game;
       this.#size = game.size;
       this.#imgSrc = imgSrc;
-      this.targetElement = targetElement;
+      this.targetElement = $(targetElement);
       this.#helpMode = false;
       this.#moves = [];
     }
@@ -24,9 +24,47 @@ class SliderPuzzleInterface {
       return this.#splitImageIntoTiles(this.#imgSrc)
                  .then(x => this.#imgTags = x.map((src, i) => `<img src="${src}" alt="${i+1}">`))
                  .then(() => this.#imgTags.unshift(`<img src="${this.#zeroTile()}" alt="0">`))
+                 .then(() => this.targetElement.html(
+                      `<div class="game">
+                          <div class="display mx-auto"></div>
+                          <div class="controls mt-8">
+                              <div class="buttons container-fluid">
+                                  <div class="row mx-auto">
+                                      <div class="col-md-4 p-1 h-100"></div>
+                                      <div class="col-md-4 p-1 h-100"><button class="up">↑</button></div>
+                                      <div class="col-md-4 p-1 h-100"></div>
+                                  </div>
+                                  <div class="row mx-auto">
+                                      <div class="col-md-4 p-1 h-100"><button class="left">←</button></div>
+                                      <div class="col-md-4 p-1 h-100"><button class="down">↓</button></div>
+                                      <div class="col-md-4 p-1 h-100"><button class="right">→</button></div>
+                                  </div>
+                              </div>
+                              <div class="actions container-fluid">
+                                  <div class="row mx-auto mt-2">
+                                      <div class="col-md-4 p-1 h-100"><button class="help">Help Mode</button></div>
+                                      <div class="col-md-4 p-1 h-100"><button class="swap">Swap Mode</button></div>
+                                      <div class="col-md-4 p-1 h-100"><button class="shuffle">Shuffle Pieces</button></div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>`
+                 ))
                  .then(() => this.render())
+                 .then(() => {
+                    this.targetElement.find('.up')   .on('click', () => this.slide('up'));
+                    this.targetElement.find('.left') .on('click', () => this.slide('left'));
+                    this.targetElement.find('.down') .on('click', () => this.slide('down'));
+                    this.targetElement.find('.right').on('click', () => this.slide('right'));
+
+                    this.targetElement.find('.help').on('click', () => this.helpMode());
+                    this.targetElement.find('.shuffle').on('click', () => this.shuffle());
+                 })
     }
 
+    get display() {
+      return this.targetElement.find('.display');
+    }
     async #splitImageIntoTiles(imageSrc) {
       const tileCountX = this.#size;
       const tileCountY = this.#size;
@@ -130,7 +168,7 @@ class SliderPuzzleInterface {
                               return previous.replace(oldTag, newTag)
                             }, numberTable);
       
-      this.targetElement.innerHTML = imgTable;
+      this.display.html(imgTable);
     } 
 
     #solveMoves() {

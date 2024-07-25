@@ -9,8 +9,5 @@ window.addEventListener("keydown", (e) => interface.slide(e.key));
 
 interface.init().then(()=> {
     console.log('initialized');
-    interface.shuffle();
-    interface.helpMode();
-    console.log('ready');
 });
 

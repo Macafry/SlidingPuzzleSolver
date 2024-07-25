@@ -4,6 +4,7 @@
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link href="css/styles.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="scripts/puzzleLogic/priorityQueue.js"></script>
@@ -14,7 +15,33 @@
         <script src="scripts/zelda/images.js"></script>
     </head>
     <body>
-        <div id="main"></div>       
+        <div id="main" style="max-width: 300px;">
+            <div id="game">
+                <div id="display" class="mx-auto">
+                </div>
+                <div class="controls mt-8">
+                    <div class="buttons container-fluid">
+                        <div class="row mx-auto">
+                            <div class="col-md-4 p-1 h-100"></div>
+                            <div class="col-md-4 p-1 h-100"><button class="up">↑</button></div>
+                            <div class="col-md-4 p-1 h-100"></div>
+                        </div>
+                        <div class="row mx-auto">
+                            <div class="col-md-4 p-1 h-100"><button class="left">←</button></div>
+                            <div class="col-md-4 p-1 h-100"><button class="down">↓</button></div>
+                            <div class="col-md-4 p-1 h-100"><button class="right">→</button></div>
+                        </div>
+                    </div>
+                    <div class="actions container-fluid">
+                        <div class="row mx-auto mt-2">
+                            <div class="col-md-4 p-1 h-100"><button class="help">Help Mode</button></div>
+                            <div class="col-md-4 p-1 h-100"><button class="swap">Swap Mode</button></div>
+                            <div class="col-md-4 p-1 h-100"><button class="shuffle">Shuffle Pieces</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
         <script src="scripts/script.js"></script>
     </body>
 </html>
