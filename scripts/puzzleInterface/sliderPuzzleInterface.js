@@ -185,6 +185,7 @@ class SliderPuzzleInterface {
     helpMode() {
       this.#helpMode = true;
       this.#moves = this.#solveMoves();
+      console.log('ready');
     }
 
     nextMove() {
