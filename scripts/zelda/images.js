@@ -1,38 +1,3 @@
-function splitImageIntoTiles(imageSrc, tileCountX = 4, tileCountY = 4) {
-    const img = new Image();
-    img.crossOrigin = "Anonymous";
-    img.src = imageSrc;
-
-    let imageSCRs = [];
-  
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0);
-  
-      const tileWidth = img.width / tileCountX;
-      const tileHeight = img.height / tileCountY;      
-  
-      for (let i = 0; i < tileCountY; i++) {
-        for (let j = 0; j < tileCountX; j++) {
-          const tileCanvas = document.createElement('canvas');
-          tileCanvas.width = tileWidth;
-          tileCanvas.height = tileHeight;
-          const tileCtx = tileCanvas.getContext('2d');
-          tileCtx.drawImage(canvas, j * tileWidth, i * tileHeight, tileWidth, tileHeight, 0, 0, tileWidth, tileHeight);
-  
-          imageSCRs.push(tileCanvas.toDataURL('image/png'));
-        }
-      }
-
-     
-    }; 
-    
-    return imageSCRs;
-  }
-
 const IMAGE_LINKS = {
     "Zill": "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/d/d1/SP1_Zill.png/revision/latest/scale-to-width-down/120?cb=20100611081922&amp;format=original",
     "Aryll": "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/e/eb/SP2_Aryll.png/revision/latest/scale-to-width-down/120?cb=20100611081922&amp;format=original",
