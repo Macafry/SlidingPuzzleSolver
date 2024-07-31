@@ -6,8 +6,10 @@ class SliderPuzzleInterface {
     #tileWidth;
     #tileHeight;
     #imgSrc;
-    #helpMode;
     #moves; 
+    #helpMode;
+    #swapMode;
+    #swapCache
 
     targetElement;
 
@@ -30,21 +32,21 @@ class SliderPuzzleInterface {
                           <div class="controls mt-8">
                               <div class="buttons container-fluid">
                                   <div class="row mx-auto">
-                                      <div class="col-md-4 p-1 h-100"></div>
-                                      <div class="col-md-4 p-1 h-100"><button class="up">↑</button></div>
-                                      <div class="col-md-4 p-1 h-100"></div>
+                                      <div class="col-sm-4 p-1 h-100"></div>
+                                      <div class="col-sm-4 p-1 h-100"><button class="arrow up">↑</button></div>
+                                      <div class="col-sm-4 p-1 h-100"></div>
                                   </div>
                                   <div class="row mx-auto">
-                                      <div class="col-md-4 p-1 h-100"><button class="left">←</button></div>
-                                      <div class="col-md-4 p-1 h-100"><button class="down">↓</button></div>
-                                      <div class="col-md-4 p-1 h-100"><button class="right">→</button></div>
+                                      <div class="col-sm-4 p-1 h-100"><button class="arrow left">←</button></div>
+                                      <div class="col-sm-4 p-1 h-100"><button class="arrow down">↓</button></div>
+                                      <div class="col-sm-4 p-1 h-100"><button class="arrow right">→</button></div>
                                   </div>
                               </div>
                               <div class="actions container-fluid">
                                   <div class="row mx-auto mt-2">
-                                      <div class="col-md-4 p-1 h-100"><button class="help">Help Mode</button></div>
-                                      <div class="col-md-4 p-1 h-100"><button class="swap">Swap Mode</button></div>
-                                      <div class="col-md-4 p-1 h-100"><button class="shuffle">Shuffle Pieces</button></div>
+                                      <div class="col-sm-4 p-1 h-100"><button class="help">Help Mode</button></div>
+                                      <div class="col-sm-4 p-1 h-100"><button class="swap">Swap Mode</button></div>
+                                      <div class="col-sm-4 p-1 h-100"><button class="shuffle">Shuffle Pieces</button></div>
                                   </div>
                               </div>
                           </div>
@@ -57,14 +59,16 @@ class SliderPuzzleInterface {
                     this.targetElement.find('.down') .on('click', () => this.slide('down'));
                     this.targetElement.find('.right').on('click', () => this.slide('right'));
 
+                    this.targetElement.find('.swap').on('click', () => this.swapMode());
                     this.targetElement.find('.help').on('click', () => this.helpMode());
                     this.targetElement.find('.shuffle').on('click', () => this.shuffle());
-                 })
+                  })
     }
 
     get display() {
       return this.targetElement.find('.display');
     }
+
     async #splitImageIntoTiles(imageSrc) {
       const tileCountX = this.#size;
       const tileCountY = this.#size;
@@ -151,6 +155,15 @@ class SliderPuzzleInterface {
         this.#helpMode = this.#moves.length > 0;
       }
 
+      this.targetElement.find('.arrow').removeClass('next-move');
+
+      if (this.#helpMode) {
+        const nextMoveClass = '.' + this.nextMove();
+        this.targetElement.find(nextMoveClass).addClass('next-move');
+      } else {
+        this.targetElement.find('.help').removeClass('mode-on');
+      }
+
     }
 
     shuffle() {
@@ -164,11 +177,18 @@ class SliderPuzzleInterface {
                            .map((x,i) => [x,i])
                            .reduce((previous, [x,i]) => {
                               let oldTag = `<td>${i}</td>`;
-                              let newTag = `<td>${x}</td>`;
+                              let newTag = `<td class="tile tile-${i}">${x}</td>`;
                               return previous.replace(oldTag, newTag)
                             }, numberTable);
       
+
+      
       this.display.html(imgTable);
+      Array.from($('.tile')).forEach(element => {
+        const tileValue = parseInt(element.className.match(/tile tile-(\d+)/)[1]);
+        $(element).on('click', () => this.selectSwap(tileValue));
+      });
+
     } 
 
     #solveMoves() {
@@ -183,9 +203,41 @@ class SliderPuzzleInterface {
     }
 
     helpMode() {
+      // help mode on
       this.#helpMode = true;
+      this.targetElement.find('.help').addClass('mode-on');
+
+      // swap mode off
+      this.#swapMode = false;
+      this.targetElement.find('.swap').removeClass('mode-on');
+      this.targetElement.find('.tile').removeClass('swap-cache');
+      
+      // solve
       this.#moves = this.#solveMoves();
-      console.log('ready');
+
+      if(this.#moves.length === 0) {
+        // help mode off
+        this.#helpMode = false;
+        this.targetElement.find('.help').removeClass('mode-on');
+      } else {
+        // visual aid
+        const nextMoveClass = '.' + this.nextMove();
+        this.targetElement.find(nextMoveClass).addClass('next-move');
+      }
+
+    }
+
+    swapMode() {
+      // help mode off
+      this.#helpMode = false;
+      this.targetElement.find('.help').removeClass('mode-on');
+
+      // swap mode on
+      this.#swapMode = !this.#swapMode;
+      this.targetElement.find('.swap').toggleClass('mode-on');
+
+      // eh
+      this.targetElement.find('.tile').removeClass('swap-cache');
     }
 
     nextMove() {
@@ -206,5 +258,23 @@ class SliderPuzzleInterface {
         this.helpStep();
         await new Promise(r => setTimeout(r, 500));
       }
+    }
+
+    selectSwap(tileValue) {
+      if(!this.#swapMode){
+        return;
+      }
+
+      const trueValue = this.#game.rotate(tileValue);
+      if (this.#swapCache === undefined) {
+        this.#swapCache = trueValue;
+        this.targetElement.find(`.tile-${tileValue}`).addClass('swap-cache');
+      } else {
+        this.#game.swapPieces(trueValue, this.#swapCache);
+        this.#swapCache = undefined;
+        this.targetElement.find('.tile').removeClass('swap-cache');
+        this.render();
+      }
+
     }
 }

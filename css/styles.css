@@ -7,3 +7,21 @@ button {
 table {
     margin: auto;
 }
+
+#hidden-pictures {
+    display: none;
+}
+
+.mode-on {
+    background-color: green;
+}
+
+.next-move {
+    background-color: blue;
+}
+
+.swap-cache {
+    border-color: gold;
+    border-width: 2px;
+}
+

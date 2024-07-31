@@ -12,35 +12,80 @@
         <script src="scripts/puzzleLogic/sliderPuzzleSolver.js"></script>
         <script src="scripts/puzzleLogic/sliderPuzzleRotator.js"></script>
         <script src="scripts/puzzleInterface/sliderPuzzleInterface.js"></script>
-        <script src="scripts/zelda/images.js"></script>
     </head>
     <body>
         <div id="main" style="max-width: 300px;">
-            <div id="game">
-                <div id="display" class="mx-auto">
-                </div>
-                <div class="controls mt-8">
-                    <div class="buttons container-fluid">
-                        <div class="row mx-auto">
-                            <div class="col-md-4 p-1 h-100"></div>
-                            <div class="col-md-4 p-1 h-100"><button class="up">↑</button></div>
-                            <div class="col-md-4 p-1 h-100"></div>
-                        </div>
-                        <div class="row mx-auto">
-                            <div class="col-md-4 p-1 h-100"><button class="left">←</button></div>
-                            <div class="col-md-4 p-1 h-100"><button class="down">↓</button></div>
-                            <div class="col-md-4 p-1 h-100"><button class="right">→</button></div>
-                        </div>
+            <div id="options">
+                <label for="select-image">Tile Puzzle</label>
+                <select id="select-image" name="select-image" class="form-control">
+                    <option value="">Select an Option</option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Zill_SP1.png">Zill </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Aryll_SP2.png">Aryll </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Tingle_SP3.png">Tingle </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Salvatore_SP4.png">Salvatore </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Tetra_SP5.png">Tetra </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Makar_SP6.png">Makar </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Medli_SP7.png">Medli </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/King_of_Red_Lions_SP8.png">King of Red Lions </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Orca_SP9.png">Orca </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Grandmother_SP10.png">Grandmother </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Doc_Bandam_SP11.png">Doc Bandam </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Quill_SP12.png">Quill </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Niko_SP13.png">Niko </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Beedle_SP14.png">Beedle </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Moblin_SP15.png">Moblin </option>
+                    <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Helmaroc_King_SP16.png">Helmaroc King </option>
+                </select>
+
+                <button id="update-puzzle">Update Puzzle</button>
+
+            </div>
+            <div id="game-box">
+                <div id="game">
+                    <div id="display" class="mx-auto" style="height: 200px">
+                        Please select a puzzle
                     </div>
-                    <div class="actions container-fluid">
-                        <div class="row mx-auto mt-2">
-                            <div class="col-md-4 p-1 h-100"><button class="help">Help Mode</button></div>
-                            <div class="col-md-4 p-1 h-100"><button class="swap">Swap Mode</button></div>
-                            <div class="col-md-4 p-1 h-100"><button class="shuffle">Shuffle Pieces</button></div>
+                    <div class="controls mt-8">
+                        <div class="buttons container-fluid">
+                            <div class="row mx-auto">
+                                <div class="col-sm-4 p-1 h-100"></div>
+                                <div class="col-sm-4 p-1 h-100"><button class="up">↑</button></div>
+                                <div class="col-sm-4 p-1 h-100"></div>
+                            </div>
+                            <div class="row mx-auto">
+                                <div class="col-sm-4 p-1 h-100"><button class="left">←</button></div>
+                                <div class="col-sm-4 p-1 h-100"><button class="down">↓</button></div>
+                                <div class="col-sm-4 p-1 h-100"><button class="right">→</button></div>
+                            </div>
+                        </div>
+                        <div class="actions container-fluid">
+                            <div class="row mx-auto mt-2">
+                                <div class="col-sm-4 p-1 h-100"><button class="help mode-off">Help Mode</button></div>
+                                <div class="col-sm-4 p-1 h-100"><button class="swap mode-off">Swap Mode</button></div>
+                                <div class="col-sm-4 p-1 h-100"><button class="shuffle">Shuffle Pieces</button></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="hidden-pictures">
+            <img src="images/Zill_SP1.png" class="puzzle-src puzzle-1">
+            <img src="images/Aryll_SP2.png" class="puzzle-src puzzle-2">
+            <img src="images/Tingle_SP3.png" class="puzzle-src puzzle-3">
+            <img src="images/Salvatore_SP4.png" class="puzzle-src puzzle-4">
+            <img src="images/Tetra_SP5.png" class="puzzle-src puzzle-5">
+            <img src="images/Makar_SP6.png" class="puzzle-src puzzle-6">
+            <img src="images/Medli_SP7.png" class="puzzle-src puzzle-7">
+            <img src="images/King_of_Red_Lions_SP8.png" class="puzzle-src puzzle-8">
+            <img src="images/Orca_SP9.png" class="puzzle-src puzzle-9">
+            <img src="images/Grandmother_SP10.png" class="puzzle-src puzzle-10">
+            <img src="images/Doc_Bandam_SP11.png" class="puzzle-src puzzle-11">
+            <img src="images/Quill_SP12.png" class="puzzle-src puzzle-12">
+            <img src="images/Niko_SP13.png" class="puzzle-src puzzle-13">
+            <img src="images/Beedle_SP14.png" class="puzzle-src puzzle-14">
+            <img src="images/Moblin_SP15.png" class="puzzle-src puzzle-15">
+            <img src="images/Helmaroc_King_SP16.png" class="puzzle-src puzzle-16">
         </div>       
         <script src="scripts/script.js"></script>
     </body>

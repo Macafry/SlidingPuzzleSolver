@@ -68,6 +68,13 @@ class SliderPuzzle {
         }
     }
 
+    swapPieces(tileValueA, tileValueB) {
+        const idxA = this._gameState.indexOf(tileValueA);
+        const idxB = this._gameState.indexOf(tileValueB);
+        this._gameState[idxA] = tileValueB;
+        this._gameState[idxB] = tileValueA;
+    }
+
     shuffle() {
         const directions = ['up', 'down', 'left', 'right'];
         for(let i = 0; i < 100000; i++){
