@@ -9,14 +9,16 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="scripts/puzzleLogic/priorityQueue.js"></script>
         <script src="scripts/puzzleLogic/sliderPuzzle.js"></script>
-        <script src="scripts/puzzleLogic/sliderPuzzleSolver.js"></script>
         <script src="scripts/puzzleLogic/sliderPuzzleRotator.js"></script>
+        <script src="scripts/solverLogic/solverV1.js"></script>
+        <!--script src="scripts/solverLogic/solverV2Levels.js"></script-->
+        <!-- script src="scripts/solverLogic/solverV2.js"></script-->
         <script src="scripts/puzzleInterface/sliderPuzzleInterface.js"></script>
     </head>
     <body>
         <div id="main" style="max-width: 300px;">
             <div id="options">
-                <label for="select-image">Tile Puzzle</label>
+                <label for="select-image">Select a Tile Puzzle:</label>
                 <select id="select-image" name="select-image" class="form-control">
                     <option value="">Select an Option</option>
                     <option value="https://raw.githubusercontent.com/Macafry/SlidingPuzzleSolver/main/images/Zill_SP1.png">Zill </option>
@@ -41,22 +43,16 @@
 
             </div>
             <div id="game-box">
-                <div id="game">
+                <div id="game" class="mt-8">
                     <div id="display" class="mx-auto" style="height: 200px">
                         Please select a puzzle
                     </div>
                     <div class="controls mt-8">
-                        <div class="buttons container-fluid">
-                            <div class="row mx-auto">
-                                <div class="col-sm-4 p-1 h-100"></div>
-                                <div class="col-sm-4 p-1 h-100"><button class="up">↑</button></div>
-                                <div class="col-sm-4 p-1 h-100"></div>
-                            </div>
-                            <div class="row mx-auto">
-                                <div class="col-sm-4 p-1 h-100"><button class="left">←</button></div>
-                                <div class="col-sm-4 p-1 h-100"><button class="down">↓</button></div>
-                                <div class="col-sm-4 p-1 h-100"><button class="right">→</button></div>
-                            </div>
+                        <div class="buttons">
+                                <button class="up">↑</button>
+                                <button class="left">←</button>
+                                <button class="down">↓</button>
+                                <button class="right">→</button>
                         </div>
                         <div class="actions container-fluid">
                             <div class="row mx-auto mt-2">
@@ -69,24 +65,6 @@
                 </div>
             </div>
         </div>
-        <div id="hidden-pictures">
-            <img src="images/Zill_SP1.png" class="puzzle-src puzzle-1">
-            <img src="images/Aryll_SP2.png" class="puzzle-src puzzle-2">
-            <img src="images/Tingle_SP3.png" class="puzzle-src puzzle-3">
-            <img src="images/Salvatore_SP4.png" class="puzzle-src puzzle-4">
-            <img src="images/Tetra_SP5.png" class="puzzle-src puzzle-5">
-            <img src="images/Makar_SP6.png" class="puzzle-src puzzle-6">
-            <img src="images/Medli_SP7.png" class="puzzle-src puzzle-7">
-            <img src="images/King_of_Red_Lions_SP8.png" class="puzzle-src puzzle-8">
-            <img src="images/Orca_SP9.png" class="puzzle-src puzzle-9">
-            <img src="images/Grandmother_SP10.png" class="puzzle-src puzzle-10">
-            <img src="images/Doc_Bandam_SP11.png" class="puzzle-src puzzle-11">
-            <img src="images/Quill_SP12.png" class="puzzle-src puzzle-12">
-            <img src="images/Niko_SP13.png" class="puzzle-src puzzle-13">
-            <img src="images/Beedle_SP14.png" class="puzzle-src puzzle-14">
-            <img src="images/Moblin_SP15.png" class="puzzle-src puzzle-15">
-            <img src="images/Helmaroc_King_SP16.png" class="puzzle-src puzzle-16">
-        </div>       
         <script src="scripts/script.js"></script>
     </body>
 </html>

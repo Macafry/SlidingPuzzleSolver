@@ -25,3 +25,30 @@ table {
     border-width: 2px;
 }
 
+.buttons {
+    display: grid;
+    width: 100%;
+    grid-template-areas:
+      ". u ."
+      "l d r";
+}
+
+.buttons > .up {
+    grid-area: u;
+}
+
+.buttons > .left {
+    grid-area: l;
+}
+
+.buttons > .down {
+    grid-area: d;
+}
+
+.buttons > .right {
+    grid-area: r;
+}
+
+#main {
+    margin: auto;
+}

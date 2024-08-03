@@ -30,17 +30,11 @@ class SliderPuzzleInterface {
                       `<div class="game">
                           <div class="display mx-auto"></div>
                           <div class="controls mt-8">
-                              <div class="buttons container-fluid">
-                                  <div class="row mx-auto">
-                                      <div class="col-sm-4 p-1 h-100"></div>
-                                      <div class="col-sm-4 p-1 h-100"><button class="arrow up">↑</button></div>
-                                      <div class="col-sm-4 p-1 h-100"></div>
-                                  </div>
-                                  <div class="row mx-auto">
-                                      <div class="col-sm-4 p-1 h-100"><button class="arrow left">←</button></div>
-                                      <div class="col-sm-4 p-1 h-100"><button class="arrow down">↓</button></div>
-                                      <div class="col-sm-4 p-1 h-100"><button class="arrow right">→</button></div>
-                                  </div>
+                              <div class="buttons">
+                                      <button class="up">↑</button>
+                                      <button class="left">←</button>
+                                      <button class="down">↓</button>
+                                      <button class="right">→</button>
                               </div>
                               <div class="actions container-fluid">
                                   <div class="row mx-auto mt-2">

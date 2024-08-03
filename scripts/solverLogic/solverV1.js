@@ -166,9 +166,12 @@ class SliderPuzzleSolver{
         // Min heap initialization
         const priority = ({string, manhattan, depth}) => {
             if (checkedStates.has(string))
-                return Number.POSITIVE_INFINITY 
+                return Number.POSITIVE_INFINITY;
             
-            return manhattan + depth;
+            if (manhattan <= root.manhattan/3)
+                return manhattan;
+            
+            return 1.500001 * manhattan + depth;
 
         }
                     
